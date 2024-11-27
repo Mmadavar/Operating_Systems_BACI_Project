@@ -1,0 +1,60 @@
+// Name: Moses Madavaram
+// Email: mvm7031@psu.edu
+// Class: CMPSC 470-001, Fall 2024
+
+
+
+
+
+
+int acc;
+
+semaphore increasing;
+semaphore decreasing;
+
+void Increase(int n) 
+{
+    int i;
+    for (i = 0; i < n; i++) {
+        p(increasing);
+        acc = acc + 1;
+        v(decreasing);
+    }
+    
+        
+    
+}
+
+void Decrease(int n) 
+{
+    int i;
+    for (i = 0; i < n; i++) {
+        p(decreasing);
+        acc = acc - 1;
+        v(increasing);
+    }
+    
+}
+
+void main() 
+{
+    int n;
+    n = 100;
+    acc = 0;
+    initialsem(increasing, 1);
+    initialsem(decreasing, 0);
+    
+    cobegin
+    {
+        Increase(n);
+        Decrease(n);
+    }
+    cout << acc << endl;
+}
+
+
+
+
+
+
+

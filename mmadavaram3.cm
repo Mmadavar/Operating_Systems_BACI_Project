@@ -1,0 +1,54 @@
+// Name: Moses Madavaram
+// Email: mvm7031@psu.edu
+// Class: CMPSC 470-001, Fall 2024
+
+// So I put in three semaphores for A,B,C
+// I put SEMA at 1 so it could execute first. For SEMB and SEMC I set them to 0 
+// so it can run in the future when i signal for SEMB and SEMC.
+// so in A I'm able to print A and then 
+// I put in a signal for SEMB so it can finally execute and so it prints B and then I signal for SEMC
+// then C executes and then in prints out C so the output would be in the order of A, B, C
+
+
+
+
+
+semaphore SEMA;
+semaphore SEMB;
+semaphore SEMC;
+
+void A()
+{
+    p(SEMA);
+    cout << "A ";
+    v(SEMB);
+}
+
+void B() 
+{
+    p(SEMB);
+    cout << "B ";
+    v(SEMC);
+}
+
+void C()
+{
+    p(SEMC);
+    cout << "C ";
+  
+}
+
+void main()
+{
+
+    initialsem(SEMA, 1);
+    initialsem(SEMB, 0);
+    initialsem(SEMC, 0);
+    cobegin {
+        A();
+        B();
+        C();
+    }
+    cout << endl;
+}
+

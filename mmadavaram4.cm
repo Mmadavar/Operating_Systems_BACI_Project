@@ -1,0 +1,55 @@
+// Name: Moses Madavaram
+// Email: mvm7031@psu.edu
+// Class: CMPSC 470-001, Fall 2024
+
+
+
+
+
+
+semaphore mutex1;
+semaphore mutex2;
+semaphore mutex3;
+
+void A()
+{
+    p(mutex1);
+    cout << "A ";
+    v(mutex2);
+}
+
+void B() 
+{
+    p(mutex2);
+    cout << "B ";
+    v(mutex3);
+}
+
+void C()
+{
+    p(mutex3);
+    cout << "C \n";
+    v(mutex1);
+  
+}
+
+void main()
+{
+
+    initialsem(mutex1, 1);
+    initialsem(mutex2, 0);
+    initialsem(mutex3, 0);
+    cobegin {
+        A();
+        B();
+        C();
+        A();
+        B();
+        C();
+        A();
+        B();
+        C();
+    }
+    cout << endl;
+}
+

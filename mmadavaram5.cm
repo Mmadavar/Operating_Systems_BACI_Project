@@ -1,0 +1,70 @@
+// Name: Moses Madavaram
+// Email: mvm7031@psu.edu
+// Class: CMPSC 470-001, Fall 2024
+
+
+
+
+
+
+
+
+semaphore one;
+semaphore two;
+semaphore three;
+int counter = 0;
+
+
+
+
+void A()
+{
+    p(one);
+    cout << "A\n";
+    v(two);
+ 
+}
+
+void B() 
+{
+    
+    p(two);
+    counter = counter + 1;
+    cout << "B ";
+    
+    if (counter == 2) {
+        cout << "\n";
+    	v(three);
+    	
+    }
+    
+    v(two);
+}
+
+void C()
+{
+    p(three);
+    cout << "C ";
+    v(three);
+    
+}
+
+void main()
+{
+
+    initialsem(one, 1);
+    initialsem(two, 0);
+    initialsem(three, 0);
+    
+    cobegin {
+        A();
+        B();
+        B();
+        C();
+        C();
+        C();
+    }
+    cout << endl;
+}
+
+    
